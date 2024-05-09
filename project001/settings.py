@@ -79,8 +79,12 @@ WSGI_APPLICATION = 'project001.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME':'railway' ,
+        'USER':'postgres' ,
+        'PASSWORD':'vwSTNipMfmVDJEiZokzIjdubsEAMTyvC',
+        'HOST':'viaduct.proxy.rlwy.net',
+        'PORT':'13613',
     }
 }
 
@@ -120,9 +124,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 import os
 STATIC_URL = 'static/'
-STATICFILES_DIRS=[
-    os.path.join(BASE_DIR, 'static')
-]
+STATICFILES_DIRS= [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build','static')
+
 
 
 # Default primary key field type
