@@ -1,0 +1,8 @@
+{% autoescape off %}
+
+Hello {{user.username}}
+Please click on this link below to activate your bracUnite account
+
+http://{{domain}}{% url 'activate' uidb64=uid token=token %}
+
+{% endautoescape %}

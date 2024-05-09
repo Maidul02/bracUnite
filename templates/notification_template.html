@@ -1,0 +1,266 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Notification Card Design</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+    <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #85FFBD;
+  background-image: linear-gradient(45deg, #0f053e 0%, #0f053e 100%);
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: black;
+}
+
+.wrapper {
+  width: 480px;
+  margin: 50px auto;
+}
+
+
+.notifications__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 105px;
+  margin-bottom: 20px;
+  padding: 0 20px;
+
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+  transition: all .3s ease-in;
+  cursor: pointer;
+}
+
+.notifications__item__avatar {
+  width: 75px;
+  height: 75px;
+  overflow: hidden;
+  margin-right: 20px;
+
+  border-radius: 50%;
+}
+
+.notifications__item__avatar img {
+  width: 100%;
+  height: 100%;
+}
+
+.notifications__item__content { width: calc( 100% - 105px ); }
+.notifications__item__title,
+.notifications__item__message { display: block; }
+
+.notifications__item__title {
+  letter-spacing: 2px;
+  font-family: 'atvice', sans-serif;
+  font-size: 17px;
+}
+
+.notifications__item__message {
+  font-family: Roboto, sans-serif;
+  font-size: 14px;
+  color: #929292;
+}
+
+.notifications__item__option {
+  width: 20px;
+  height: 20px;
+  margin: 8px 0;
+
+  border-radius: 50%;
+  color: white;
+  opacity: 0;
+
+  font-size: 10px;
+  text-align: center;
+  line-height: 20px;
+
+  cursor: pointer;
+  transition: all .2s;
+}
+
+.notifications__item__option.archive {
+    display:None 
+    background-color: #3dc98c; 
+}
+
+.notifications__item__option.delete { background-color: #c93d4d; }
+
+
+/*
+* Animation part
+*/
+.notifications__item:hover {
+  background-color: #f7f7f7;
+  transform: scale( 0.95 );
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.notifications__item:hover .notifications__item__option { opacity: 1; }
+
+.notifications__item.archive .notifications__item__title,
+.notifications__item.delete .notifications__item__title {
+  color: white;
+}
+
+.notifications__item.archive .notifications__item__message,
+.notifications__item.delete .notifications__item__message {
+  color: #f3f3f3;
+}
+
+.notifications__item.archive {
+  background-color: #3dc98c;
+  animation: archiveAnimation 1.5s cubic-bezier(0, 0, 0, 1.12) forwards;
+  animation-delay: .6s;
+}
+
+.notifications__item.delete {
+  background-color: #c93d4d;
+  animation: deleteAnimation 1.5s cubic-bezier(0, 0, 0, 1.12) forwards;
+  animation-delay: .6s;
+}
+
+
+@keyframes archiveAnimation{
+  to {
+    transform: translateX( 100px );
+    opacity: 0;
+  }
+}
+
+@keyframes deleteAnimation{
+  to {
+    transform: translateX( -100px );
+    opacity: 0;
+  }
+}
+.credit a {
+    text-decoration: none;
+    color:white;
+    font-weight: 800;
+}
+
+.credit {
+    text-align: center;
+    font-family: Verdana,Geneva,Tahoma,sans-serif;
+}
+    </style>
+</head>
+<body>
+	<div class="wrapper">
+
+  <div class="notifications">
+
+    {% for notification in user_notifications %}
+    <div class="notifications__item">
+      <div class="notifications__item__avatar">
+        <img src="{{notification.sender.profile_pic.url}}" />
+      </div>
+
+      <div class="notifications__item__content">
+        <span class="notifications__item__title"><a href="{%url 'portfolio' user_id=notification.sender.id%}">{{ notification.sender.name }}</a></span>
+        <span class="notifications__item__message">{{ notification.message }}</span>
+        <span class="notifications__item__message">Contact: {{ notification.sender.phone }}</span>
+        <span class="notifications__item__message">{{ notification.timestamp }}</span>
+      </div>
+
+      <div>
+        <div class="notifications__item__option delete js-option">
+          <i class="fas fa-trash"></i>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+
+
+
+</div>
+<div class="credit"><span style="color:tomato;font-size:20px;">❤ </span> <a href="http://127.0.0.1:8000/">bracUnite</a></div>
+<script type="text/javascript" src="script.js"></script>
+<script>
+
+(function(){
+
+    /*
+    * Get all the buttons actions
+    */
+    let optionBtns = document.querySelectorAll( '.js-option' );
+  
+    for(var i = 0; i < optionBtns.length; i++ ) {
+  
+      /*
+      * When click to a button
+      */
+      optionBtns[i].addEventListener( 'click', function ( e ){
+  
+        var notificationCard = this.parentNode.parentNode;
+        var clickBtn = this;
+        /*
+        * Execute the delete or Archive animation
+        */
+        requestAnimationFrame( function(){ 
+  
+          archiveOrDelete( clickBtn, notificationCard );
+  
+          /*
+          * Add transition
+          * That smoothly remove the blank space
+          * Leaves by the deleted notification card
+          */
+          window.setTimeout( function( ){
+            requestAnimationFrame( function() {
+              notificationCard.style.transition = 'all .4s ease';
+              notificationCard.style.height = 0;
+              notificationCard.style.margin = 0;
+              notificationCard.style.padding = 0;
+            });
+  
+            /*
+            * Delete definitely the animation card
+            */
+            window.setTimeout( function( ){
+              notificationCard.parentNode.removeChild( notificationCard );
+            }, 1500 );
+          }, 1500 );
+        });
+      })
+    }
+  
+    /*
+    * Function that adds
+    * delete or archive class
+    * To a notification card
+    */
+    var archiveOrDelete = function( clickBtn, notificationCard ){
+      if( clickBtn.classList.contains( 'archive' ) ){
+        notificationCard.classList.add( 'archive' );
+      } else if( clickBtn.classList.contains( 'delete' ) ){
+        notificationCard.classList.add( 'delete' );
+      }
+    }
+  
+  })()
+  
+</script>  
+</body>
+</html>

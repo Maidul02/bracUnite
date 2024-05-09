@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Responsive Resume UI Design in HTML and CSS</title>
+	
+    
+
+
+    <!--[CSS/JS Files - Start]-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script> 
+	<script src="https://cdn.apidelv.com/libs/awesome-functions/awesome-functions.min.js"></script> 
+
+
+
+
+
+
+
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        body{
+            background: #c4c4c4;
+            font-size: 14px;
+            line-height: 20px;
+        }
+        
+        .resume_wrapper{
+            display: flex;
+            width: 800px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 10px;
+        }
+        
+        .resume_wrapper .resume_left{
+            width: 35%;
+            background: #26252d;
+        }
+        
+        .resume_wrapper .resume_left .resume_image{
+            width: 100%;
+        }
+        
+        .resume_wrapper .resume_left .resume_image img{
+            width: 100%;
+            display: block;
+        }
+        
+        .resume_wrapper .resume_title{
+            color: #fff;
+            text-transform: uppercase;
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 10px;
+            letter-spacing: 4px;
+        }
+        
+        .resume_wrapper .resume_left .resume_info{
+            color: #84838b;
+        }
+        
+        .resume_wrapper .resume_left .resume_bottom{
+            padding: 20px 30px;
+        }
+        
+        .resume_wrapper .resume_item{
+            padding: 20px 0;
+            border-bottom: 1px solid #0175b2;
+        }
+        
+        .resume_wrapper  .resume_item:last-child{
+            border-bottom: 0;
+        }
+        
+        .resume_wrapper .resume_left .resume_namerole{
+            display: none;
+        }
+        
+        .resume_wrapper .resume_namerole .name{
+            font-size: 20px;
+            color: #fff;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 5px;
+            letter-spacing: 4px;
+        }
+        
+        .resume_wrapper .resume_left .resume_namerole .role{
+            color: #84838b;
+        }
+        
+        .resume_wrapper .resume_left .resume_contact .resume_info:last-child{
+             margin-top: 10px;
+        }
+        
+        .resume_wrapper .resume_left .resume_contact .resume_subtitle{
+            color: #fff;
+            margin-bottom: 2px;
+        }
+        
+        .resume_wrapper .resume_left .resume_skills .skills_list{
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        
+        .resume_wrapper .resume_left .resume_skills .skills_list .skills_bar p{
+            position: relative;
+            width: 125px;
+            height: 20px;
+            background: #fff;
+        }
+        
+        .resume_wrapper .resume_left .resume_skills .skills_list .skills_bar p span{	
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: #0175b2;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .resume_wrapper .resume_right{
+            width: 65%;
+            padding: 20px 40px;
+            color: #26252d;
+        }
+        
+        .resume_wrapper .resume_right .resume_namerole .name{
+            color: #26252d;
+            font-size: 32px;
+        }
+        
+        .resume_wrapper .resume_right .resume_namerole .role{
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+        
+        .resume_wrapper .resume_right .resume_item .resume_title{
+            color: #26252d;
+        }
+        
+        .resume_wrapper .resume_right .resume_data{
+            display: flex;
+        }
+        
+        .resume_wrapper .resume_right .resume_data .year{
+            padding-right: 35px;
+            width: 115px;
+            position: relative;
+        }
+        
+        .resume_wrapper .resume_right .resume_data .content{
+            padding-left: 35px;
+            margin-bottom: 20px;
+            width: calc(100% - 115px);
+        }
+        
+        .resume_wrapper .resume_right .resume_data .year:before{
+            content: "";
+            position: absolute;
+            top: 5px;
+            right: 0;
+            width: 10px;
+            height: 10px;
+            background: #fff;
+            border: 1px solid #26252d;
+            border-radius: 50%;
+        }
+        
+        .resume_wrapper .resume_right .resume_data .year:after{
+            content: "";
+            position: absolute;
+            top: 17px;
+            right: 4px;
+            width: 3px;
+            height: 90%;
+            background: #0175b2;
+        }
+        
+        .resume_wrapper .resume_right .resume_data:last-child .year:after{
+            display: none;
+        }
+        
+        .resume_wrapper .resume_right .resmue_interests .resume_info{
+            display: flex;
+            justify-content: space-between;
+            text-align: center;
+        }
+        
+        .resume_wrapper .resume_right .resmue_interests .interests .int_icon{
+            font-size: 38px;
+            color: #0175b2;
+            margin-bottom: 10px;
+        }
+        
+        
+        @media screen and (max-width: 800px){
+            .resume_wrapper .resume_right .resume_namerole{
+                display: none;
+            }
+            .resume_wrapper .resume_left .resume_namerole{
+                display: block;
+            }
+            .resume_wrapper{
+                width: 95%;
+                margin: 10px auto;
+                flex-direction: column;
+            }
+            .resume_wrapper .resume_left,
+            .resume_wrapper .resume_right{
+                width: 100%;
+            }
+        }
+        
+        @media screen and (max-width: 424px){
+            .resume_wrapper .resume_right{
+                padding: 20px 30px;
+            }
+            .resume_wrapper .resume_right .resume_data{
+                flex-direction: column;
+            }
+            .resume_wrapper .resume_right .resume_data .year{
+                padding: 0;
+                margin-bottom: 5px;
+                width: 100%;
+                color: #0175b2;
+            }
+            .resume_wrapper .resume_right .resume_data .year:before,
+            .resume_wrapper .resume_right .resume_data .year:after{
+                display: none;
+            }
+            .resume_wrapper .resume_right .resume_data .content{
+                width: 100%;
+                padding: 0;
+            }
+            .resume_wrapper .resume_right .resmue_interests .interests .int_icon{
+                font-size: 24px;
+            }
+        }
+    </style>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js" ></script>
+
+ 
+
+	<script type="text/javascript">
+	$(document).ready(function($) 
+	{ 
+
+		$(document).on('click', '.btn_print', function(event) 
+		{
+			event.preventDefault();
+
+			//credit : https://ekoopmans.github.io/html2pdf.js
+			
+			var element = document.getElementById('resume_wrapper'); 
+
+			//easy
+			html2pdf().from(element).save();
+
+			//custom file name
+			//html2pdf().set({filename: 'code_with_mark_'+js.AutoCode()+'.pdf'}).from(element).save();
+
+
+			//more custom settings
+			var opt = 
+			{
+			  margin:       1,
+			  filename:     'pageContent_'+js.AutoCode()+'.pdf',
+			  image:        { type: 'jpeg', quality: 0.98 },
+			  html2canvas:  { scale: 2 },
+			  jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+			};
+
+			// New Promise-based usage:
+			html2pdf().set(opt).from(element).save();
+
+			 
+		});
+
+ 
+ 
+	});
+	</script>
+
+
+</head>
+<body>
+
+<div class="resume_wrapper" id="resume_wrapper">
+	<div class="resume_left">
+		<div class="resume_image">
+			<img src="{{CurrentUser.profile_pic.url}}" alt="Resume_image">
+		</div>
+		<div class="resume_bottom">
+			<div class="resume_item resume_namerole">
+				<div class="name">Rosie Jackson</div>
+				<div class="role">UI Designer</div>
+			</div>
+			<div class="resume_item resume_profile">
+				<div class="resume_title">Profile</div>
+				<div class="resume_info">{{CurrentUser.bio}}</div>
+			</div>
+			<div class="resume_item resume_address">
+				<div class="resume_title">Address</div>
+				<div class="resume_info">
+					{{CurrentUser.current_city_listed}}
+				</div>
+			</div>
+			<div class="resume_item resume_contact">
+				<div class="resume_title">Contact</div>
+				{% comment %} <div class="resume_info">
+					<div class="resume_subtitle">Phone</div>
+					<div class="resume_subinfo">+62 000 222 333</div>
+				</div> {% endcomment %}
+				<div class="resume_info">
+					<div class="resume_subtitle">Email</div>
+					<div class="resume_subinfo">{{CurrentUser.user.email}}</div>
+				</div>
+			</div>
+			<div class="resume_item resume_skills">
+				<div class="resume_title">Skills</div>
+                
+				<div class="resume_info">
+					<div class="skills_list">
+                        <ul>
+                        {%for s in CurrentUser.skills_listed%}
+                            <li>
+                                <div class="skills_left">{{s}}</div>
+                            </li>
+                        {%endfor%}
+                        </ul>
+						
+						<div class="skills_bar">
+							{% comment %} <p>
+								<span style="width: 90%"></span>
+							</p> {% endcomment %}
+						</div>
+					</div>
+					{% comment %} <div class="skills_list">
+						<div class="skills_left">CSS</div>
+						<div class="skills_bar">
+							<p>
+								<span style="width: 80%"></span>
+							</p>
+						</div>
+					</div>
+					<div class="skills_list">
+						<div class="skills_left">Javascript</div>
+						<div class="skills_bar">
+							<p>
+								<span style="width: 50%"></span>
+							</p>
+						</div>
+					</div>
+					<div class="skills_list">
+						<div class="skills_left">Photoshop</div>
+						<div class="skills_bar">
+							<p>
+								<span style="width: 95%"></span>
+							</p>
+						</div>
+					</div> {% endcomment %}
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="resume_right">
+		<div class="resume_item resume_namerole">
+			<div class="name">{{CurrentUser.name}}</div>
+			<div class="role">{{CurrentUser.profession}}</div>
+		</div>
+		<div class="resume_item resume_education">
+			<div class="resume_title">Education</div>
+			<div class="resume_info">
+				
+					{% comment %} <div class="year">2000 - 2010</div> {% endcomment %}
+					<div class="content">
+						<p><i><u><b>School</p></b></i></u>
+						<p>{{CurrentUser.school}}</p>
+					</div>
+				
+                    <div class="content">
+						<p><i><u><b>College:</p></b></i></u>
+						<p>{{CurrentUser.college}}</p>
+					</div>
+                    <div class="content">
+						<p><i><u><b>University:</p></b></i></u>
+						<p>{{CurrentUser.university}}</p>
+					</div>
+			</div>
+		</div>
+		<div class="resume_item resume_experience">
+			<div class="resume_title">Certifications</div>
+			<div class="resume_info">
+				<div class="content">
+                    {%for c in CurrentUser.certifications_listed%}
+                    <p>{{forloop.counter}}. {{c}}</p>
+                    {%endfor%}
+                </div>
+				
+			</div>
+		</div>
+
+        <div class="resume_item resume_experience">
+			<div class="resume_title">Publications:</div>
+			<div class="resume_info">
+				<div class="content">
+                    {%for c in CurrentUser.publication_listed%}
+                    <p>{{forloop.counter}}. {{c}}</p>
+                    {%endfor%}
+                </div>
+				
+			</div>
+		</div>
+
+        <div class="resume_item resume_experience">
+			<div class="resume_title">Projects:</div>
+			<div class="resume_info">
+				<div class="content">
+                    {%for c in CurrentUser.project_listed%}
+                    <p>{{forloop.counter}}. {{c}}</p>
+                    {%endfor%}
+                </div>
+				
+			</div>
+		</div>
+
+        {% comment %} <div class="resume_item resume_experience">
+			<div class="resume_title">Experience</div>
+			<div class="resume_info">
+				<div class="resume_data">
+					<div class="year">2000 - 2010</div>
+					<div class="content">
+						<p>Title</p>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+					</div>
+				</div>
+				<div class="resume_data">
+					<div class="year">2010 - 2013</div>
+					<div class="content">
+						<p>Title</p>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+					</div>
+				</div>
+				
+			</div>
+		</div> {% endcomment %}
+		{% comment %} <div class="resume_item resmue_interests">
+			<div class="resume_title">Interests</div>
+			<div class="resume_info">
+				<div class="interests">
+					<div class="int_icon">
+						<i class="fas fa-volleyball-ball"></i>
+					</div>
+					<div class="int_data">Volleyball</div>
+				</div>
+				<div class="interests">
+					<div class="int_icon">
+						<i class="fas fa-book-open"></i>
+					</div>
+					<div class="int_data">Reading</div>
+				</div>
+				<div class="interests">
+					<div class="int_icon">
+						<i class="fas fa-film"></i>
+					</div>
+					<div class="int_data">Movies</div>
+				</div>
+				<div class="interests">
+					<div class="int_icon">
+						<i class="fas fa-biking"></i>
+					</div>
+					<div class="int_data">Riding</div>
+				</div>
+			</div>
+		</div> {% endcomment %}
+	</div>
+</div>
+
+<div class="text-center" style="padding:20px;">
+    <input type="button" id="rep" value="Print" class="btn btn-info btn_print">
+</div>
+
+
+</body>
+</html>

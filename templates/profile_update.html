@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Profile</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: 0.5px;
+            outline: none;
+            border: none;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            background-color: #0f053e;
+        }
+        
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255,255,255,0.13);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+            padding: 5px 35px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-container h3 {
+            font-size: 32px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: 600;
+            line-height: 42px;
+            text-align: center;
+        }
+
+        .form-container h4 {
+            font-size: 18px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: 600;
+            line-height: 42px;
+            text-align: center;
+            color: red;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: #fff;
+            color: #080710;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        input[type="file"] {
+            margin-bottom: 10px;
+        }
+        select{
+            width: 200px; 
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h3>Edit Profile</h3>
+        <h4></h4>
+        <form method="post" action="{% url 'profile_update' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="button-container">
+                <button type="submit" onclick="alert('Disclaimer: Sharing of Information Among App Users')">Update</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

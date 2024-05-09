@@ -1,0 +1,5 @@
+asgiref==3.8.1
+Django==5.0.6
+django-jazzmin==3.0.0
+setuptools==68.0.0
+wheel==0.41.2
