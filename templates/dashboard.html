@@ -579,7 +579,7 @@ h3{
                 </li>
                 {%else%}
                 <li class="nav-link">
-                    <a href="{%url 'portfolio' user_id=CurrentUser.id|add:-1%}">
+                    <a href="{%url 'portfolio' user_id=CurrentUser.id%}">
                         <i class='bx bx-user alt icon ' ></i>
                         <span class="text nav-text">Profile</span>
                     </a>
@@ -600,7 +600,7 @@ h3{
                 </li>
 
                 <li class="nav-link">
-                      <a href="{%url 'cv' user_id=CurrentUser.id|add:-1%}">
+                      <a href="{%url 'cv' user_id=CurrentUser.id%}">
                           <i class='bx bxs-download alt icon ' ></i>
                           <span class="text nav-text">Download resume</span>
                       </a>
