@@ -179,7 +179,7 @@ def Handle_signup(request):
         email_subject = "Activate Your Account"
         message = render_to_string('activate.html',{
             'user':user,
-            'domain':current_site,
+            'domain':str(current_site)+'/activate',
             'uid':urlsafe_base64_encode(force_bytes(user.pk)), #pk=primary key
             'token': generate_token.make_token(user)
         })
