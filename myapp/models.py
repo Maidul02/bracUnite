@@ -41,7 +41,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     birth_date = models.DateField(null=True, blank=True)   
     name =  models.CharField(null=True,blank=True, max_length=200, default="None")
-    profile_pic = models.ImageField(default='default.jpg', upload_to='profiles_pics')
+    profile_pic = models.ImageField(default='default.jpg', upload_to='./media/profiles_pics')
     hobby = models.CharField(null=True,blank=True, max_length=200, default='N')
     skills = models.CharField(null=True,blank=True, max_length=200, default='N')
     department = models.CharField(null=True,blank=True, max_length=200, default='N')
